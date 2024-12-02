@@ -1,5 +1,5 @@
 use std::iter::Iterator;
-use std::{fmt, format};
+use std::fmt;
 use std::fmt::Formatter;
 use wasm_bindgen::prelude::wasm_bindgen;
 
@@ -39,7 +39,10 @@ impl Universe {
         }
         count
     }
+}
 
+#[wasm_bindgen]
+impl Universe {
     pub fn new() -> Universe {
         let width = 64;
         let height = 64;
@@ -60,10 +63,11 @@ impl Universe {
             cells
         }
     }
-}
 
-#[wasm_bindgen]
-impl Universe {
+    pub fn render(&self) -> String {
+        self.to_string()
+    }
+
     pub fn tick(&mut self) {
         let mut next = self.cells.clone();
 
